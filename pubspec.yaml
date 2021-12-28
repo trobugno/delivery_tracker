@@ -1,6 +1,7 @@
 name: delivery_tracker
 description: A package useful to retrieve information about your deliveries using the tracking number.
-version: 0.0.1
+version: 1.0.0-Alpha
+homepage: https://github.com/trobugno/delivery_tracker
 
 environment:
   sdk: ">=2.15.1 <3.0.0"

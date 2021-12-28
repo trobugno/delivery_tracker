@@ -1,39 +1,59 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+**Delivery Tracker** is born to give you a way to retrieve information about your delivery. <br>
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+## About Delivery Tracker
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
+The author of this package, made it to help himself to develop a website for his brother to manager his customers, delivery requests, etc. During the development of this applicative, Trobugno decide to separate the logic and make a standlone package.
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
+## Installing
+Add **delivery_tracker** to your pubspec.yaml file:
+```yaml
+dependencies:
+  delivery_tracker:
+```
+Import **delivery_tracker** in files that it will be used:
 ```dart
-const like = 'sample';
+import 'package:delivery_tracker/delivery_tracker.dart';
 ```
 
-## Additional information
+## Search a Delivery
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+At this moment **delivery_tracker** search only _SDA_ deliveries.
+
+```dart
+final service = SDAService();
+TrackingInfo trackingInfo = await service.searchDelivery('1C4371H074041');
+```
+
+If you want to see an example of this **TrackingInfo** look following code:
+```dart
+TrackingInfo(packages: [
+    TrackingPackage(
+        trackingCode: '1C4371H074041', 
+        details: [
+            TrackingPackageDetails(
+                location: 'Centro Operativo SDA Novara (NO)',
+                date: _toDate('24-12-2021 11:20'),
+                status: TrackingStatus.delivered),
+            TrackingPackageDetails(
+                location: 'Centro Operativo SDA Novara (NO)',
+                date: _toDate('24-12-2021 09:19'),
+                status: TrackingStatus.delivering),
+            TrackingPackageDetails(
+                location: 'Hub Espresso Piacenza',
+                date: _toDate('22-12-2021 15:06'),
+                status: TrackingStatus.inTransit),
+            TrackingPackageDetails(
+                location: 'Hub Espresso Piacenza',
+                date: _toDate('22-12-2021 15:06'),
+                status: TrackingStatus.inTransit),
+            TrackingPackageDetails(
+                location: 'Casarano (LE)',
+                date: _toDate('21-12-2021 14:13'),
+                status: TrackingStatus.inTransit),
+            TrackingPackageDetails(
+                location: 'Casarano (LE)',
+                date: _toDate('20-12-2021 18:59'),
+                status: TrackingStatus.readyToSend),
+        ]),
+    ], status: TrackingStatus.delivered, signature: "bosa");
+```
